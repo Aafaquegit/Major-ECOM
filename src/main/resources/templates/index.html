@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <title>Document</title>
+	<style>
+	        body {
+	            font-family: Arial, sans-serif;
+	            margin: 0;
+	            padding: 0;
+	            box-sizing: border-box;
+	        }
+	        header {
+	            background-color: #333;
+	            color: #fff;
+	            padding: 20px;
+	            text-align: center;
+	        }
+	        .blurb-section {
+	            display: flex;
+	            flex-direction: column; /* Stack blurbs vertically */
+	            align-items: center; /* Center blurbs horizontally */
+	            padding: 40px 20px; /* Increased padding */
+	            background-color: #f4f4f4;
+	        }
+	        .blurb {
+	            text-align: center;
+	            width: 80%; /* Adjust width for better readability */
+	            padding: 40px; /* Increased padding */
+	            margin-bottom: 30px; /* Increased space between blurbs */
+	            font-size: 1.2em; /* Increased font size */
+	            color: #fff; /* White text for better contrast */
+	            background-size: cover; /* Ensure the background image covers the entire blurb */
+	            background-position: center; /* Center the background image */
+	            position: relative; /* For overlay positioning */
+	            border-radius: 10px; /* Rounded corners */
+	            overflow: hidden; /* Ensure the overlay doesn't overflow */
+	        }
+	        .blurb::before {
+	            content: '';
+	            position: absolute;
+	            top: 0;
+	            left: 0;
+	            right: 0;
+	            bottom: 0;
+	            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for better text readability */
+	            z-index: 1;
+	        }
+	        .blurb h2, .blurb p {
+	            position: relative;
+	            z-index: 2; /* Ensure text is above the overlay */
+	        }
+	        .blurb:last-child {
+	            margin-bottom: 0; /* Remove margin for the last blurb */
+	        }
+	        footer {
+	            background-color: #333;
+	            color: #fff;
+	            text-align: center;
+	            padding: 20px;
+	            width: 100%;
+	        }
+	    </style>
+    
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" >
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img th:src="@{/images/logo.png}"  src="../static/images/logo.png" width="auto" height="40" class="d-inline-block align-top" alt=""/>
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"></ul>
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/}" href="#">home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/shop}" href="#">shop</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/login}" href="#">login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}" href="#">logout</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/cart}" href="#">cart</a>
+                </li>
+                <li class="nav-item active">
+                    <span class="nav-link" th:text="${cartCount}">0</span>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+
+<!-- Header Section -->
+    <header>
+        <h1>Welcome to Our E-Commerce Store</h1>
+        <p>Your one-stop shop for all your needs</p>
+    </header>
+
+    <!-- Blurb Sections -->
+    <div class="blurb-section">
+        <div class="blurb" style="background-image: url('https://www.shutterstock.com/blog/wp-content/uploads/sites/5/2020/06/Featured-Image.jpg?resize=1250,1120');">
+            <h2>Quality Products</h2>
+            <p>We offer a wide range of high-quality products that meet your needs. Our products are carefully curated to ensure the best experience for our customers.</p>
+        </div>
+        <div class="blurb" style="background-image: url('https://d2s30hray1l0uq.cloudfront.net/frontend/featured-image.jpg');">
+            <h2>Variety of Products</h2>
+            <p>Enjoy a wide range of products. From home appliances to entertainment systems, we got everything.</p>
+        </div>
+        <div class="blurb" style="background-image: url('https://www.shutterstock.com/image-photo/female-hand-holds-black-binoculars-260nw-1786416212.jpg');">
+            <h2>Easy to search for products</h2>
+            <p>You can filter out products which you want. Makes it easier for you to get the product from the huge number  of products that we have.</p>
+        </div>
+        <!-- Additional content to enable scrolling -->
+        <!--<div class="blurb" style="background-image: url('https://via.placeholder.com/800x400');">
+            <h2>Secure Payments</h2>
+            <p>We use the latest encryption technology to ensure your payments are secure. Shop with confidence knowing your financial information is protected.</p>
+        </div>-->
+        <!--<div class="blurb" style="background-image: url('https://via.placeholder.com/800x400');">
+            <h2>Easy Returns</h2>
+            <p>Not satisfied with your purchase? No problem! We offer hassle-free returns and exchanges within 30 days of purchase.</p>
+        </div>-->
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>&copy; 2025 E-Commerce Store. All rights reserved.</p>
+    </footer>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
