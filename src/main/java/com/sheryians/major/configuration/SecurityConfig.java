@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		http.csrf().ignoringAntMatchers("/h2-console/**");
 		
-		http.headers().frameOptions().disable(); // remove this line when replacing from h2 db to any other db
+//		http.headers().frameOptions().disable(); // remove this line when replacing from h2 db to any other db
 		
 //		http
 //        .authorizeRequests()
